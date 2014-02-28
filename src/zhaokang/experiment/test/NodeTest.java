@@ -16,11 +16,13 @@ public class NodeTest {
 	public static void main(String[] args) throws IOException {
 
 		// 获取文件，并将文件中的二维矩阵转化为二维数组；
-		String filePath = "D:/javaFileInput/other.txt";// 指定读取文件的路径
+		String filePath = "D:/javaFileInput/test.txt";// 指定读取文件的路径
 		InterfaceFileOperator fileOperation = new FileOperation();
 		List<String> list = (List<String>) fileOperation
 				.readDataFromFile(filePath);
 		String[][] metrix = fileOperation.getTwoDimensionalMatrix(list);
+		fileOperation.printMetrix(metrix);
+		System.out.println();
 
 		// 测试二维邻接表，并且将其中的邻接信息打印到控制台上；
 		Graphic graphic = new Graphic();
@@ -28,9 +30,11 @@ public class NodeTest {
 		graphic.makeAdjoinListAccordingToTwoMetrix(metrix);
 		System.out.println("输出该邻接链表。");
 		graphic.printGraphNodesLinkInfo(metrix);
+		
+		graphic.findAllRoutineAccordingToSpecifyNode("1");
 
 		// 执行深度优先搜索并输出结果
-		graphic.execDFSAccordingToAdjoinList();
+//		graphic.execDFSAccordingToAdjoinList();
 
 	}
 }

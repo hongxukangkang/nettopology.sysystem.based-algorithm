@@ -43,4 +43,12 @@ public interface InterfaceFileOperator {
 	 * @return 二维矩阵
 	 */
 	public String[][] getTwoDimensionalMatrix(List<String> list);
+
+	/**
+	 * 输出二维矩阵的信息
+	 * 
+	 * @param metrix
+	 *            需要打印的二维矩阵信息
+	 */
+	public void printMetrix(String[][] metrix);
 }

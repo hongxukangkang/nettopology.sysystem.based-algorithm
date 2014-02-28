@@ -101,8 +101,32 @@ public class FileOperation implements InterfaceFileOperator {
 				strings[i][j] = lineStrings[j];
 			}
 		}
-		System.out.println("==========以上都是赵康的构造二维矩阵的测试========");
+		System.out.println("==========以下都是赵康构造的二维矩阵的测试，皆为伪数据========");
+		System.out.println();
 		return strings;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * file.operationinterfaces.InterfaceFileOperator#printMetrix(java.lang.
+	 * String[][])
+	 */
+	@Override
+	public void printMetrix(String[][] metrix) {
+		System.out.println("The information of metrix is as follows");
+		int line = metrix.length;
+		int cols = metrix[0].length;
+		for (int i = 0; i < line; i++) {
+			System.out.print("The " + (i + 1)
+					+ "th information of metrix is:-->");
+			for (int j = 0; j < cols; j++) {
+				System.out.print(metrix[i][j] + "  ");
+			}
+			System.out.println();
+		}
+
 	}
 
 }

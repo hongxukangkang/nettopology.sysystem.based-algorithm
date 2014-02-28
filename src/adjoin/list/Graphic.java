@@ -251,31 +251,106 @@ public class Graphic {
 	 * @return
 	 */
 	public String findAllRoutineAccordingToSpecifyNode(String nodeID) {
+
+		// 将以结点为nodeID出发的节点进行深度进栈
+		Stack<Node> getStack = pushStackAccordingNodeId(nodeID);
+		popStackAccordingStack(getStack);// 根据给定的栈执行出栈操作
+
 		String result = "";
 
-		Node tempNode = nodes[Integer.parseInt(nodeID)];
+		Node tempNode = nodes[Integer.parseInt(nodeID) - 1];
 
 		Stack<Node> stack = new Stack<Node>();
+		stack.push(tempNode);// 压进栈中
 		String nodeId = tempNode.getNodeId();
 		makeVisitedNodeTrue(nodeId);
-		stack.push(tempNode);// 压进栈中
 
 		tempNode = tempNode.getNextNode();
-		int id = Integer.parseInt(tempNode.getNodeId());
-		while (nodes[id].isVisited()) {
-			if ((tempNode.getNextNode() != null)) {
-				tempNode = tempNode.getNextNode();
-				id = Integer.parseInt(tempNode.getNodeId());
-			} else {// 出栈操作,查找其他的点
 
+		while (tempNode.isVisited()) {
+			if (tempNode.getNextNode() != null) {
+				tempNode = tempNode.getNextNode();
+			} else {
+				// 执行出栈操作，并进行如下的判断操作
+				// 如果栈中的最后一个元素所指向的元素，有与除父节点外前的结点的Id相同，则存在回路输出之；，
+				Stack<Node> tempStack = new Stack<Node>();
+				tempStack = stack;
+				if (!stack.isEmpty()) {
+					String resultString = execStackPop(tempStack);
+					System.out.println(resultString);
+					stack.pop();
+				}
 			}
 		}
-
+		nodeId = tempNode.getNodeId();
 		makeVisitedNodeTrue(nodeId);
-		stack.push(tempNode);
+		stack.push(nodes[Integer.parseInt(nodeId) - 1]);
 
 		makeVisitedNodeFalse(nodeID);
 		return result;
+
+	}
+
+	/**
+	 * 根据给定的栈执行出栈操作
+	 * 
+	 * @param getStack
+	 *            给定的栈
+	 */
+	private void popStackAccordingStack(Stack<Node> getStack) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * 将以结点为nodeID的出发节点并且与该节点相连接的节点进行深度进栈
+	 * 
+	 * @param nodeID
+	 */
+	private Stack<Node> pushStackAccordingNodeId(String nodeID) {
+		Stack<Node> stack = new Stack<Node>();
+		makeAllNodesVisitedFalse(nodes);
+		Node tempNode = nodes[Integer.parseInt(nodeID) - 1];
+
+		while (tempNode.isVisited()) {
+			if (tempNode.getNextNode() != null) {
+				tempNode = tempNode.getNextNode();
+			} else {
+				break;
+			}
+		}
+		while (!tempNode.isVisited()) {
+			stack.push(tempNode);
+		}
+
+		return stack;
+
+	}
+
+	/**
+	 * 
+	 * 执行出栈操作，并输出其中的环路圈
+	 * 
+	 * @param tempStack
+	 * @return
+	 */
+	private String execStackPop(Stack<Node> tempStack) {
+
+		if (tempStack.isEmpty()) {
+			System.out.println("The stack is null,no elements");
+		} else {
+			int number = tempStack.capacity();
+		}
+		tempStack.pop();
+		return null;
+	}
+
+	/**
+	 * 寻找结点号为nodeId的父节点
+	 * 
+	 * @param nodeId
+	 */
+	public void findFatherNode(String nodeId) {
 
 	}
 }
