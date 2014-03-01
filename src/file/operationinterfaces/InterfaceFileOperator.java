@@ -21,13 +21,13 @@ public interface InterfaceFileOperator {
 	public List<?> readDataFromFile(String filePath) throws IOException;
 
 	/**
-	 * 写入数据岛指定的文件路径filePath的操作
+	 * 写入数据到指定的文件路径filePath的操作
 	 * 
 	 * @param filePath
 	 *            指定的文件路径
 	 * @throws IOException
 	 */
-	public void inputFileTxtFormat(String filePath) throws IOException;
+	public void inputFileTxtFormat(String filePath,String[][]metrix) throws IOException;
 
 	/**
 	 * 获取文件中的数据，以列表的形式返回给用户，一般不使用；

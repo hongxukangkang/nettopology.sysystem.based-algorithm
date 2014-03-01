@@ -30,11 +30,13 @@ public class NodeTest {
 		graphic.makeAdjoinListAccordingToTwoMetrix(metrix);
 		System.out.println("输出该邻接链表。");
 		graphic.printGraphNodesLinkInfo(metrix);
-		
+
 		graphic.findAllRoutineAccordingToSpecifyNode("1");
 
 		// 执行深度优先搜索并输出结果
-//		graphic.execDFSAccordingToAdjoinList();
+		// graphic.execDFSAccordingToAdjoinList();
+
+		fileOperation.inputFileTxtFormat("D:/javaFileInput/tt.doc", metrix);
 
 	}
 }

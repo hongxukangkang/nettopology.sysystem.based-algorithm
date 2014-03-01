@@ -255,39 +255,7 @@ public class Graphic {
 		// 将以结点为nodeID出发的节点进行深度进栈
 		Stack<Node> getStack = pushStackAccordingNodeId(nodeID);
 		popStackAccordingStack(getStack);// 根据给定的栈执行出栈操作
-
-		String result = "";
-
-		Node tempNode = nodes[Integer.parseInt(nodeID) - 1];
-
-		Stack<Node> stack = new Stack<Node>();
-		stack.push(tempNode);// 压进栈中
-		String nodeId = tempNode.getNodeId();
-		makeVisitedNodeTrue(nodeId);
-
-		tempNode = tempNode.getNextNode();
-
-		while (tempNode.isVisited()) {
-			if (tempNode.getNextNode() != null) {
-				tempNode = tempNode.getNextNode();
-			} else {
-				// 执行出栈操作，并进行如下的判断操作
-				// 如果栈中的最后一个元素所指向的元素，有与除父节点外前的结点的Id相同，则存在回路输出之；，
-				Stack<Node> tempStack = new Stack<Node>();
-				tempStack = stack;
-				if (!stack.isEmpty()) {
-					String resultString = execStackPop(tempStack);
-					System.out.println(resultString);
-					stack.pop();
-				}
-			}
-		}
-		nodeId = tempNode.getNodeId();
-		makeVisitedNodeTrue(nodeId);
-		stack.push(nodes[Integer.parseInt(nodeId) - 1]);
-
-		makeVisitedNodeFalse(nodeID);
-		return result;
+		return nodeID;
 
 	}
 
@@ -298,19 +266,23 @@ public class Graphic {
 	 *            给定的栈
 	 */
 	private void popStackAccordingStack(Stack<Node> getStack) {
-		// TODO Auto-generated method stub
+		System.out.println("Hello I will pop.");
 
 	}
 
+	Stack<Node> stackNodes = new Stack<Node>();
+
 	/**
-	 * 将以结点为nodeID的出发节点并且与该节点相连接的节点进行深度进栈
+	 * 
+	 * 存在一个回溯的问题； 将以结点为nodeID的出发节点并且与该节点相连接的节点进行深度进栈
 	 * 
 	 * @param nodeID
 	 */
 	private Stack<Node> pushStackAccordingNodeId(String nodeID) {
-		Stack<Node> stack = new Stack<Node>();
-		makeAllNodesVisitedFalse(nodes);
+
 		Node tempNode = nodes[Integer.parseInt(nodeID) - 1];
+
+		String nodeId = tempNode.getNodeId();
 
 		while (tempNode.isVisited()) {
 			if (tempNode.getNextNode() != null) {
@@ -320,10 +292,25 @@ public class Graphic {
 			}
 		}
 		while (!tempNode.isVisited()) {
-			stack.push(tempNode);
-		}
+			stackNodes.push(tempNode);
+			makeVisitedNodeTrue(nodeId);
+			if (tempNode.getNextNode() != null) {
+				tempNode = tempNode.getNextNode();
+			} else {
+				break;
+			}
 
-		return stack;
+			while (tempNode.isVisited()) {
+				if (tempNode.getNextNode() != null) {
+					tempNode = tempNode.getNextNode();
+				} else {
+					break;
+				}
+			}
+			nodeId = tempNode.getNodeId();
+			pushStackAccordingNodeId(nodeId);
+		}
+		return stackNodes;
 
 	}
 

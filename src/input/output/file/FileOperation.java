@@ -1,10 +1,12 @@
 package input.output.file;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,24 +21,48 @@ public class FileOperation implements InterfaceFileOperator {
 	/*
 	 * 向文件之内写入数据，filePath代表写入的文件路径；
 	 */
-	public void inputFileTxtFormat(String filePath) throws IOException {
+	public void inputFileTxtFormat(String filePath, String[][] metrix)
+			throws IOException {
 
 		File toFile = new File(filePath);
+		FileOutputStream fos = null;
+		BufferedWriter bw = null;
+		OutputStreamWriter osw = null;
 
 		// 首先判定文件路径以及文件是否存在，若是不存的话，则直接创建文件路径,之后寻找；否则直接执行写操作；
 
-		if (toFile.getParentFile().exists()) {// 如果文件的路径存在的话
-			FileWriter writer = new FileWriter(new File(filePath));
-			writer.write(dataString);// 执行写入操作；
-			writer.flush();
-			writer.close();
-		} else {
-			toFile.getParentFile().mkdir();
-			FileWriter writer = new FileWriter(new File(filePath));
-			writer.write(dataString);// 执行写入操作；
-			writer.flush();
-			writer.close();
+		if (!toFile.exists()) {// 如果文件的路径存在的话
+			toFile.createNewFile();
 		}
+
+		fos = new FileOutputStream(toFile);
+		osw = new OutputStreamWriter(fos);
+		bw = new BufferedWriter(osw);
+		int line = metrix.length;
+		int cols = metrix[0].length;
+		for (int i = 0; i < line; i++) {
+			for (int j = 0; j < cols; j++) {
+				if (j != (cols - 1)) {
+					bw.write(metrix[i][j] + "  ");
+				} else {
+					bw.write(metrix[i][j] + "\n");
+				}
+			}
+		}
+
+		if (bw != null) {
+			bw.close();
+			bw = null;
+		}
+		if (osw != null) {
+			osw.close();
+			osw = null;
+		}
+		if (fos != null) {
+			fos.close();
+			fos = null;
+		}
+
 	}
 
 	/*
