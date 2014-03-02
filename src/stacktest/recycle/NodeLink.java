@@ -122,7 +122,6 @@ public class NodeLink {
 			}
 			tempNode.setVisited(false);
 		}
-		System.out.println("Hello");
 		return nodes;
 	}
 
@@ -211,7 +210,7 @@ public class NodeLink {
 	public void pushNodeToStack(int startid) {
 
 		Node tempNode = nodes[startid - 1];
-		System.out.println("以" + startid + "为起点的节点的节点深度进栈暂时执行完毕，开始下一个节点");
+		System.out.println("以" + startid + "为起点的节点的节点深度进栈暂时执行完毕!");
 		while (!tempNode.isVisited()) {
 			stack.push(tempNode);
 			makeSpecifyNodeTrue(startid, nodes);
@@ -261,13 +260,25 @@ public class NodeLink {
 			int i = 0;
 			while ((size - i) >= 3) {
 				Node stackSecondNode = stack2.get(i);
-				boolean result = judeExistsRelationOfLink(
-						stackLastNode, stackSecondNode);// 判断节点之间是否存在着父子关系
+				boolean result = judeExistsRelationOfLink(stackLastNode,
+						stackSecondNode);// 判断节点之间是否存在着父子关系
 				if (result) {
-					System.out.println("存在着回路");
+					System.out.println("存在着以下所示的回路，此时的i：" + i);
 					// 则输出连接情况
+					int sizeK = stack2.size() - 1;
+					while (sizeK != 0) {// 假设条件，需要重新赋值
+						System.out.print(stack2.get(sizeK).getId() + "-->");
+						sizeK--;
+					}
+					if (i == 0) {
+						System.out.println(stack2.get(i).getId());
+					} else {
+						System.out.println();
+					}
+
+					// System.out.println(stack2.get(sizeK).getId());//暂时封存
 				} else {
-					System.out.println("不存在父子关系");
+					// System.out.println("不存在连接回路");
 				}
 				i++;
 			}
@@ -279,6 +290,7 @@ public class NodeLink {
 	/**
 	 * 
 	 * 判断第一个节点是否与第二个节点之间存在着连接关系
+	 * 
 	 * @param stackFirstNode
 	 * @param nodeLink
 	 */
@@ -288,7 +300,7 @@ public class NodeLink {
 		boolean result = false;
 		int size = nodeLink.length;
 		int i = 0;
-		while (size > 0) {
+		while (size > i) {
 			if (nodeLink[i].getId() == stackFirstNode.getId()) {
 				result = true;
 				break;
@@ -296,7 +308,7 @@ public class NodeLink {
 				i++;
 			}
 		}
-		System.out.println(result);
+		// System.out.println(result);
 		return result;
 	}
 
