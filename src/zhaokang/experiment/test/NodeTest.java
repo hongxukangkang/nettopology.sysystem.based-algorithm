@@ -16,7 +16,7 @@ public class NodeTest {
 	public static void main(String[] args) throws IOException {
 
 		// 获取文件，并将文件中的二维矩阵转化为二维数组；
-		String filePath = "D:/javaFileInput/test.txt";// 指定读取文件的路径
+		String filePath = "D:/javaFileInput/tt.doc";// 指定读取文件的路径
 		InterfaceFileOperator fileOperation = new FileOperation();
 		List<String> list = (List<String>) fileOperation
 				.readDataFromFile(filePath);

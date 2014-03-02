@@ -230,6 +230,7 @@ public class Graphic {
 	 * 
 	 * @param nodeId
 	 */
+	@SuppressWarnings("unused")
 	private void makeVisitedNodeFalse(String nodeId) {
 		int number = nodes.length;
 		for (int i = 0; i < number; i++) {
@@ -321,6 +322,7 @@ public class Graphic {
 	 * @param tempStack
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private String execStackPop(Stack<Node> tempStack) {
 
 		if (tempStack.isEmpty()) {
