@@ -37,19 +37,4 @@ public class NodeTest {
 		}
 		nodeLink.printNodeLinkInfo(nodes);
 	}
-
-	// 测试二维邻接表，并且将其中的邻接信息打印到控制台上；
-	// Graphic graphic = new Graphic();
-	// graphic.initialGraphic(metrix);
-	// graphic.makeAdjoinListAccordingToTwoMetrix(metrix);
-	// System.out.println("输出该邻接链表。");
-	// graphic.printGraphNodesLinkInfo(metrix);
-	//
-	// graphic.findAllRoutineAccordingToSpecifyNode("1");
-	//
-	// // 执行深度优先搜索并输出结果
-	// // graphic.execDFSAccordingToAdjoinList();
-	//
-	// fileOperation.inputFileTxtFormat("D:/javaFileInput/tt.doc", metrix);
-
 }

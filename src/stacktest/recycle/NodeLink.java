@@ -93,12 +93,12 @@ public class NodeLink {
 			System.out.print("The " + (i + 1) + "th node's link info is:");
 			while (tempNode.getNextNode() != null) {
 				System.out.print("(" + tempNode.getId() + ","
-						+ tempNode.getValue() + ")," + tempNode.isVisited()
-						+ "-->");
+						+ tempNode.getValue() + ")" + "-->");// +
+																// tempNode.isVisited()
 				tempNode = tempNode.getNextNode();
 			}
 			System.out.println("(" + tempNode.getId() + ","
-					+ tempNode.getValue() + ")," + tempNode.isVisited());
+					+ tempNode.getValue() + "),");// + tempNode.isVisited()
 		}
 	}
 
@@ -210,7 +210,7 @@ public class NodeLink {
 	public void pushNodeToStack(int startid) {
 
 		Node tempNode = nodes[startid - 1];
-		System.out.println("以" + startid + "为起点的节点的节点深度进栈暂时执行完毕!");
+		System.out.println("以" + startid + "为起点的节点的节点开始深度进栈!");
 		while (!tempNode.isVisited()) {
 			stack.push(tempNode);
 			makeSpecifyNodeTrue(startid, nodes);
@@ -266,19 +266,19 @@ public class NodeLink {
 					System.out.println("存在着以下所示的回路，此时的i：" + i);
 					// 则输出连接情况
 					int sizeK = stack2.size() - 1;
-					while (sizeK != 0) {// 假设条件，需要重新赋值
+					while (sizeK != i) {// 假设条件，需要重新赋值
 						System.out.print(stack2.get(sizeK).getId() + "-->");
 						sizeK--;
 					}
 					if (i == 0) {
 						System.out.println(stack2.get(i).getId());
 					} else {
-						System.out.println();
+						System.out.println(stack2.get(i).getId());
 					}
-
+					System.out.println();
 					// System.out.println(stack2.get(sizeK).getId());//暂时封存
 				} else {
-					// System.out.println("不存在连接回路");
+					// System.out.println("不存在连接回路了");
 				}
 				i++;
 			}
