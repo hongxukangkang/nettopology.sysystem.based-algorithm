@@ -10,6 +10,8 @@ import java.util.Stack;
  * 
  */
 public class NodeLink {
+	
+	private int number = 0;
 
 	private Stack<Node> stack = new Stack<Node>();// 用于保存进入栈内的数据
 	private Node[] nodes;
@@ -264,10 +266,11 @@ public class NodeLink {
 						stackSecondNode);// 判断节点之间是否存在着父子关系
 				if (result) {
 					System.out.println("存在着以下所示的回路，此时的i：" + i);
+					number++;
 					// 则输出连接情况
 					int sizeK = stack2.size() - 1;
 					while (sizeK != i) {// 假设条件，需要重新赋值
-						System.out.print(stack2.get(sizeK).getId() + "-->");
+						System.out.print(stack2.get(sizeK).getId() + " ");
 						sizeK--;
 					}
 					if (i == 0) {
@@ -276,7 +279,6 @@ public class NodeLink {
 						System.out.println(stack2.get(i).getId());
 					}
 					System.out.println();
-					// System.out.println(stack2.get(sizeK).getId());//暂时封存
 				} else {
 					// System.out.println("不存在连接回路了");
 				}
@@ -333,5 +335,13 @@ public class NodeLink {
 			tempNode = tempNode.getNextNode();
 		}
 		return linkNodes;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
 	}
 }

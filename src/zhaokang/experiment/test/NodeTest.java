@@ -17,7 +17,7 @@ public class NodeTest {
 	public static void main(String[] args) throws IOException {
 
 		// 获取文件，并将文件中的二维矩阵转化为二维数组；
-		String filePath = "D:/javaFileInput/other.txt";// 指定读取文件的路径
+		String filePath = "D:/javaFileInput/topology.txt";// 指定读取文件的路径
 		InterfaceFileOperator fileOperation = new FileOperation();
 		List<String> list = (List<String>) fileOperation
 				.readDataFromFile(filePath);
@@ -36,5 +36,6 @@ public class NodeTest {
 			nodeLink.makeAllNodesFalse(nodes);
 		}
 		nodeLink.printNodeLinkInfo(nodes);
+		System.out.println(nodeLink.getNumber());
 	}
 }
